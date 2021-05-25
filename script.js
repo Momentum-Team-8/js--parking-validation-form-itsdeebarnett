@@ -3,35 +3,43 @@ console.log('Add validation!');
 //set up boolean to make sure input form is valid
 let formIsValid;
 
+
 //check for typos 
 
 const form = document.querySelector("#parking-form")
 const carYearInput = document.querySelector("#car-year")
-const datestart = document.querySelector("#start-date")
+const dateStart = document.querySelector("#start-date")
 const daysInput = document.querySelector("#days")
 const cardNumber = document.querySelector("#credit-card")
 const expDate = document.querySelector("#expiration")
+const submitButton = document.querySelector("#submit-button")
+
+
 
 form.addEventListener('submit', event => {
     event.preventDefault()
     validateCarYear()
-    validateDate()
+    // validateDate()
     validateCardNumber()
-    validateExpirationDate() 
+    validateExpDate() 
+
+    
 
     if (formIsValid) {
         const total = document.createElement('div')
     
         let totalCost = daysInput.value * 5 
+        
 
-        document.querySelector("#car-field").classList.add('input-field')
-        document.querySelector(".input-group").classList.add('input-field')
-        document.querySelector("#days-field").classList.add('input-field')
-        document.querySelector("#credit-card-field").classList.add('input-field')
-        document.querySelector("#cvv-field").classList.add('input-field')
-        document.querySelector("#expiration-field").classList.add('input-field')
-
+        document.querySelector("#car-field").classList.add('input-valid')
+        document.querySelector(".input-group").classList.add('input-valid')
+        document.querySelector("#days-field").classList.add('input-valid')
+        document.querySelector("#credit-card-field").classList.add('input-valid')
+        document.querySelector("#cvv-field").classList.add('input-valid')
+        document.querySelector("#expiration-field").classList.add('input-valid')
+        
         document.querySelector('#total').appendChild(total).innerHTML = "Total cost is $" + totalCost + "."
+        
     }
 })
 
@@ -47,6 +55,25 @@ function validateCarYear() {
     formIsValid = true
 }
 }
+
+
+
+function validateExpDate() {
+
+
+
+    // if (validateexpDate.value.split("/").lenght !=3) ( message =='' ? element.name+" failed in my test.n" : message}
+    
+    
+    var regex = new RegExp(
+        ("^\d{2}\/\d{2}$"
+        ))
+        if (!regex.test())
+        return false;
+
+    return luhnCheck(number);
+}
+
 
 function validateCardNumber(number) {
     var regex = new RegExp("^[0-9]{16}$");
